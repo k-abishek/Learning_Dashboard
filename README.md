@@ -1,6 +1,6 @@
-# Dashboard App
+# Learning Dashboard
 
-A React Native mobile app that provides a dashboard with buttons linking to various websites. Each button can store and display associated credentials (username, password, email).
+A React Native mobile app built with Expo SDK 54 that provides a dashboard with buttons linking to various websites. Each button can store and display associated credentials (username, password, email).
 
 ## Features
 
@@ -9,57 +9,87 @@ A React Native mobile app that provides a dashboard with buttons linking to vari
 - Long press a button to view stored credentials
 - Persistent storage of website data using AsyncStorage
 
-## Getting Started
+## Prerequisites
 
-1. Ensure you have Node.js and npm installed.
-2. Install Expo CLI globally: `npm install -g @expo/cli`
-3. Navigate to the project directory: `cd "a:\experiment Project1"`
-4. Install dependencies: `npm install`
-5. Start the development server: `npm start` or `expo start`
+- Node.js (version 18 or later)
+- npm or yarn
+- Expo CLI (install globally: `npm install -g @expo/cli`)
 
-## Running on Device
+## Installation
 
-- For Android: `npm run android` or `expo start --android`
-- For iOS: `npm run ios` or `expo start --ios`
-- For Web: `npm run web` or `expo start --web`
+1. Clone the repository or navigate to the project directory.
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-## Building an Android APK
+## Running the App
 
-There are two recommended ways to produce an APK from this Expo project:
-
-1) Cloud build with EAS (recommended, no Android SDK required locally)
-
-- Install EAS CLI: `npm install -g eas-cli` or use `npx eas`
-- Log in to Expo: `npx expo login` (or `eas login`)
-- Run the build (profile `preview` produces an APK):
-
-```powershell
-cd .\
-npx eas build --platform android --profile preview
+Start the development server:
+```bash
+npm start
+# or
+expo start
 ```
 
-After the build finishes the EAS output will provide a download URL for the APK.
+This will open the Expo DevTools in your browser. You can then:
+- Scan the QR code with the Expo Go app on your phone.
+- Press 'a' for Android emulator, 'i' for iOS simulator, 'w' for web.
 
-2) Local native build (requires Android Studio, Android SDK, JDK installed)
+## Building an APK
 
-- Prebuild native projects and run the Gradle release task:
+### Cloud Build with EAS (Recommended)
 
-```powershell
-cd .\
-npm run build:android-local
-```
+1. Install EAS CLI:
+   ```bash
+   npm install -g eas-cli
+   ```
 
-This runs `expo prebuild` (generates `android/`) and then runs Gradle's `assembleRelease` via the wrapper. The built APK will be in `android\app\build\outputs\apk\release\`.
+2. Log in to Expo:
+   ```bash
+   npx expo login
+   ```
 
-Notes & troubleshooting
-- EAS builds require an Expo account and may prompt for credentials or signing keys.
-- Local builds require the Android toolchain and can fail if the JAVA_HOME/ANDROID_HOME environment variables are not set.
+3. Run the build:
+   ```bash
+   npx eas build --platform android --profile preview
+   ```
+
+After the build completes, EAS will provide a download URL for the APK.
+
+### Local Build (Requires Android SDK)
+
+1. Prebuild the native project:
+   ```bash
+   npx expo prebuild
+   ```
+
+2. Build the APK:
+   ```bash
+   cd android
+   ./gradlew assembleRelease
+   ```
+
+The APK will be in `android/app/build/outputs/apk/release/`.
+
+## Project Structure
+
+- `App.js`: Main app component
+- `app.json`: Expo configuration
+- `package.json`: Dependencies and scripts
+- `assets/`: Static assets
+- `.gitignore`: Files and directories ignored by Git (includes node_modules, build artifacts, etc.)
 
 ## Adding Websites
 
-Currently, the app starts with default websites (Google and GitHub). To add more websites or edit credentials, modify the `sites` array in `App.js` or implement an add/edit interface.
+Modify the `sites` array in `App.js` to add more websites or edit credentials.
 
 ## Notes
 
-- Credentials are stored locally using AsyncStorage and are not encrypted. For production use, consider using secure storage solutions.
-- The app uses Expo for easier development and deployment.
+- Credentials are stored locally using AsyncStorage and are not encrypted. For production, consider secure storage.
+- The app uses Expo for simplified development and deployment.
+
+## Troubleshooting
+
+- If you encounter dependency issues, try `npm install --legacy-peer-deps`
+- For EAS builds, ensure you have an Expo account and follow the prompts for signing keys.
