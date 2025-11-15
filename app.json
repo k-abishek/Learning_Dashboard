@@ -11,8 +11,14 @@
     "ios": {
       "supportsTablet": true
     },
-    "android": {},
-    "web": {
+    "android": {
+      "package": "com.kabishek.dashboardapp"
+    },
+    "web": {},
+    "extra": {
+      "eas": {
+        "projectId": "902384fb-24b4-4afb-9b8e-a51faacb521f"
+      }
     }
   }
 }
